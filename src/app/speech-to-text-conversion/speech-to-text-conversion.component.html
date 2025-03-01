@@ -1,0 +1,25 @@
+<!-- <div class="container text-center">
+  <h2>Speech to Text</h2>
+  <button (click)="startListening()" class="btn btn-primary">Start Listening</button>
+  <button (click)="stopListening()" class="btn btn-danger">Stop Listening</button>
+  <p>{{ transcript }}</p>
+</div> -->
+
+
+<div class="container text-center">
+    <h2>Speech to Text</h2>
+    <div class="form-group">
+        <label for="language">Select Language:</label>
+        <select id="language" class="form-control" [(ngModel)]="selectedLanguage">
+            <option value="en-US">English (US)</option>
+            <option value="es-ES">Spanish (Spain)</option>
+            <option value="fr-FR">French (France)</option>
+            <option value="de-DE">German (Germany)</option>
+            <!-- Add more languages as needed -->
+        </select>
+    </div>
+    <button (click)="startListening()" class="btn btn-primary">Start Listening</button>
+    <button (click)="stopListening()" class="btn btn-danger">Stop Listening</button>
+    <p>{{ transcript }}</p>
+  </div>
+  
