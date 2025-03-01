@@ -1,0 +1,15 @@
+pre {
+    background-color: #918b8b;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+code {
+    background-color: #f8f4f4;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(59, 4, 50);
+}

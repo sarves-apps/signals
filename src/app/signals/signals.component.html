@@ -1,3 +1,48 @@
-<button (click)="incressCounter()"></button>
+<button (click)="incressCounter()">+</button> &nbsp; <button (click)="decressCounter()">-</button> &nbsp; <button
+    (click)="reset()">x</button>
 
-{{count()}} : {{doubleCount()}} : {{setCounterValue}}
+<p>A <b>Signal</b> in Angular is a wrapper around a value that notifies its consumers when the value changes.</p>
+<p>count = signal(0);</p>
+<div>
+    <code>Count : {{count()}}</code>
+</div>
+
+<p><b>Computed signals</b> derive their values from other signals and automatically update when those signals
+    change.They are
+    read-only which means you cannot directly assign values to a computed signal.</p>
+<p>this.count() is a signal</p>
+<div>
+    <code>doubleCount = computed(() => this.count() * 2); Output : {{doubleCount()}} </code>
+</div>
+
+<p><b>Signal from Services</b></p>
+<div>
+    <code>{{setCounterValue}}</code>
+</div>
+
+<br>
+<hr>
+
+<p><b>Api calls - Using Observable</b></p>
+<code>{{observableString}}</code>
+<p>Type: todos$ is of type Observable.</p>
+<p>Behavior: It represents an observable stream of data that can emit multiple values over time.</p>
+<p>Usage: You would typically subscribe to this observable in your component to get the data and handle it (e.g., displaying it in the template). The $ suffix is a common naming convention to indicate that the variable is an observable.</p>
+@for (todo of (todos$ | async); track todo.id) {
+    <div>
+      <span><b>{{ todo.title }}</b></span>
+    </div>
+  }
+<hr>
+<p><b>Api calls - Using Signal</b></p>
+<code>{{signaleString}}</code>
+<p>Type: todos is not an observable but a reactive signal.</p>
+<p>Behavior: toSignal is a function that converts the observable returned by getTodos() into a reactive signal with an initial value of [].
+</p>
+<p>Usage: Signals are part of Angular's reactive system, which allows you to react to changes in data and automatically update the template without manually subscribing. This can make your code cleaner and easier to manage.
+</p>
+@for (todo of todos(); track todo.id) {
+    <div>
+      <span><b>{{ todo.title }}</b></span>
+    </div>
+  }
