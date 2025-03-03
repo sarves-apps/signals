@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { SignalsService } from '../signals.service';
 import { ApiServicesService } from '../api-services.service';
 import { Observable } from 'rxjs';
@@ -16,22 +16,32 @@ import { toSignal } from '@angular/core/rxjs-interop';
   styleUrl: './signals.component.css'
 })
 export class SignalsComponent {
-  count = signal(1);
+  content = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum";
+  count = signal(0);
   setCounterValue: any;
   private readonly todosService: ApiServicesService = inject(ApiServicesService);
   doubleCount = computed(() => this.count() * 2);
+  public todos = toSignal(this.todosService.getTodos(), { initialValue: [{title: this.content}] });
   public todos$: Observable<any> = this.todosService.getTodos();
-  public todos = toSignal(this.todosService.getTodos(), { initialValue: [] });
+
 
 
   observableString = "public todos$: Observable<any> = this.todosService.getTodos()"
-  signaleString = "public todos = toSignal(this.todosService.getTodos(), { initialValue: [] })"
+  signaleString = "public todos = toSignal(this.todosService.getTodos(), { initialValue: [title: content] })"
 
   constructor(private signalsService:SignalsService){
     effect(res=> {
-      console.log(this.count(),"RES");
+      console.log(this.count(),"ValueCh+anged");
       this.setCounterValue = this.signalsService.setCounterValue();
     })
+  }
+
+  setSameValue(){
+    let val = prompt('set same value');
+    if (val) {
+      this.count.set(Number(val));
+    }
+    
   }
   
 
